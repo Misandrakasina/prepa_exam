@@ -1,125 +1,21 @@
-Note du binôme :
+Page et Fonctionnalité 
 
--nanao route za et puis efa mandeha le page login.php
--mais ref te hiditra anaty login.php dia mila manao ----->localhosat:8000/login fa tsy localhost:8000
--mila micreer un include header.php koa antsika
+Page: Login.php 
+Fonctionnalité : Entre dans login inscrit son nom et entre dans une base de données
 
+Page: acceuil.php 
 
+Front-nav: -icon : profil (user connecter)
+            -icon : categorie (filtre par categorie)
+            -icon : notif echange
 
 
+Front-body:
+    -Afficher tout les objets des utilisateurs
+    -Description Objet
+    -Prix Objet
+    -Type ou Categorie Objet
+    -Un boutton echanger
 
-
-
-
-
-1. Login utilisateur (auto-login, sans inscription)
-
-(ok) -Créer une table users 
-
-(ok) -Créer quelques utilisateurs en dur dans la base
-
-(ok) -Faire une page login.php
-
-() -Include header.php 
-
-() -Choisir l’utilisateur via une liste deroulante
-
-() -Stocker l’id utilisateur connecté dans $_SESSION['idUser']
-
-() -Rediriger vers la page principale après login + Bouton connecté
-
-() -Vérifier sur chaque page que l’utilisateur est connecté
-
-() -Faire un logout.php pour détruire la session
-
-
-
- 2. Menu « Messages »
-
-() -dashboard/messages.php
-
-() -Vérifier que l’utilisateur est connecté avant d’afficher
-
-() -messages.php inclut header.php
-
-() -fonction mandefa message 
-
-() -fonction pour savoir qui est en ligne (optionnel) (point vert) (randomme les gens en ligne pendant 3 minutes)
-
-() -fonction au dashboard pour voir combien de nouveau message (optionnel)(petit nombre)
-
-() -Non lu et lu 
-
-() -Rafraichissement de la page pour voir les nouveaux messages
-
- --------------------
-| Dans le message.php |
- --------------------
-
- 3. Boîte de réception
-() -Dans le messages.php
-
-() -Récupérer les messages où recipient_id = $_SESSION['idUser']
-
-() -Trier par created_at DESC
-
-() -Afficher :expéditeur,sujet,date,état (lu / non lu)
-
-() -Mettre les messages non lus en gras
-
-() 4. Lire un message
-
-() -Créer lireMessage.php?id=...
-
-() -Vérifier que le message appartient bien au user connecté
-
-() -Afficher le contenu du message
-
-() -Passer is_read = 1 quand on ouvre le message
-
-() 5. Envoi de message
-
-() -Créer envoyerMessage.php
-
-() -Formulaire avec :destinataire (liste déroulante des users),sujet,message
-
-() -À l’envoi :insérer dans la table messages
-() .sender_id = $_SESSION['idUser']
-()  .recipient_id = user choisi is_read = 0
-()  .Redirection + message de confirmation
-
-() 6. Messages envoyés (optionnel mais conseillé)
-
-() -Créer messagesEnvoyes.php
-
-() -Afficher les messages où sender_id = $_SESSION['idUser']
-
-() -Afficher :destinataire,sujet,date
-
-() 7. Messages non lus (bonus)
-
-() -Compter les messages non lus
-
-SELECT COUNT(*) FROM messages WHERE recipient_id = ? AND is_read = 0
-
-
-() -Afficher le nombre dans le menu Messages
-
-() 8. Sécurité minimale
-
-() -Vérifier la session sur chaque page
-
-() -Vérifier les droits avant lire un message
-
-() -Ne jamais afficher un message qui n’appartient pas au user
-
-() 9. Tests à faire
-
-() -Envoyer un message
-
-() -Vérifier qu’il apparaît chez le destinataire
-
-() -Vérifier le statut non lu → lu
-
-() -Tester avec plusieurs utilisateurs
-
+Front-liste: 
+    -Afficher une liste de nos objet
