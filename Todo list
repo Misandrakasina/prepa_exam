@@ -7,10 +7,27 @@ Page: acceuil.php
 
 Front-nav: -icon : profil (user connecter)
             -icon : categorie (filtre par categorie)
+            -icon : notif echange
+
+Page: Login.php 
+Fonctionnalité : Entre dans login inscrit son nom et entre dans une base de données
+
+Page: acceuil.php 
+
+Front-nav: -icon : profil (user connecter)
+            -icon : categorie (filtre par categorie)
             -icon : notif echan
 taloha eeee
 
+Front-body:
+    -Afficher tout les objets des utilisateurs
+    -Description Objet
+    -Prix Objet
+    -Type ou Categorie Objet
+    -Un boutton echanger
 
+Front-liste: 
+    -Afficher une liste de nos objet
 
 
 
@@ -126,7 +143,6 @@ SELECT COUNT(*) FROM messages WHERE recipient_id = ? AND is_read = 0
 
 () -Tester avec plusieurs utilisateurs
 
-=======
 Front-body:
     -Afficher tout les objets des utilisateurs
     -Description Objet
@@ -136,4 +152,3 @@ Front-body:
 
 Front-liste: 
     -Afficher une liste de nos objet
->>>>>>> 9295b4c1308e3235d3b053a13067afa17bfae6be
