@@ -14,7 +14,7 @@ INSERT IGNORE INTO categories (nom) VALUES
 ('Électronique'),
 ('Vêtements'),
 ('Livres'),
-('Maison et Jardin'),
+('Sac'),
 ('Sports');
 
 -- Insérer les données de test pour les objets
