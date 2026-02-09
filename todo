@@ -1,0 +1,7 @@
+[ok] Integrer le template dans MVC Flight
+
+[] MENU MESSAGE
+    [] login utilisateur (auto-login, pas d'inscription)
+    [] envoie message entre utilisateur
+    [] systeme de message lu et non lu
+    [] mettre boutton rafraichir pour voir les nouveau messages
