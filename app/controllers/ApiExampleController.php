@@ -87,16 +87,7 @@ class ApiExampleController
 
         if ($name !== '')  { $updates[] = "name = ?";  $params[] = $name; }
         if ($email !== '') { $updates[] = "email = ?"; $params[] = $email; }
-
-        $params[] = (int)$id;
-
-        $query = "UPDATE users SET " . implode(', ', $updates) . " WHERE id = ?";
-        $affected = $this->db()->run($query, ...$params);
-
-        if ($affected > 0) {
-            $this->app->json(['success' => true, 'message' => 'Mis à jour', 'id' => (int)$id]);
-        } else {
-            $this->app->json(['success' => false, 'message' => 'Aucune modification'], 404);
-        }
     }
 }
+
+?>

@@ -65,8 +65,8 @@ return [
     'database' => [
         'host'     => 'localhost',           // ou '127.0.0.1' ou l'IP de ton serveur
         'dbname'   => 'message',      // ← change ici
-        'user'     => 'itu',     // souvent 'root' en local
-        'password' => 'itu',    // ← mets le vrai mot de passe
+        'user'     => 'root',     // souvent 'root' en local
+        'password' => '',    // ← mets le vrai mot de passe
         'charset'  => 'utf8mb4',             // recommandé
     ],
 
