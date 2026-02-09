@@ -139,16 +139,16 @@
 
                         <!-- User Menu -->
                         <!-- User Menu -->
+                        <!-- User Menu -->
                         <div class="dropdown">
                             <button class="btn btn-outline-secondary d-flex align-items-center" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="/assets/images/avatar-placeholder.svg" alt="User Avatar" width="24"
                                     height="24" class="rounded-circle me-2">
-                                <span class="d-none d-md-inline" id="userName">John Doe</span>
-                                <!-- ← on va changer ça -->
+                                <span class="d-none d-md-inline" id="userName">Chargement...</span>
+                                <!-- ← on change ça -->
                                 <i class="bi bi-chevron-down ms-1"></i>
                             </button>
-                            <!-- ... le menu reste le même -->
 
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
@@ -805,18 +805,26 @@
             </div>
         </div>
     </div>
-    <script>
-    // Récupère les infos utilisateur depuis l'API (ou localStorage)
-    fetch('/api/users') // ← pour l'instant on prend le premier utilisateur
-        .then(response => response.json())
-        .then(users => {
-            if (users && users.length > 0) {
-                const user = users[0]; // À améliorer plus tard avec l'utilisateur connecté
-                document.getElementById('userName').textContent = user.name;
-            }
-        })
-        .catch(err => console.log('Erreur chargement nom :', err));
-    </script>
+   <script>
+    const email = localStorage.getItem('userEmail');
+
+    if (email) {
+        fetch(`/api/me?email=${encodeURIComponent(email)}`)
+            .then(r => r.json())
+            .then(user => {
+                if (user.name) {
+                    document.getElementById('userName').textContent = user.name;
+                } else {
+                    document.getElementById('userName').textContent = 'Utilisateur inconnu';
+                }
+            })
+            .catch(() => {
+                document.getElementById('userName').textContent = 'Erreur';
+            });
+    } else {
+        document.getElementById('userName').textContent = 'Non connecté';
+    }
+</script>
 </body>
 
 </html>
