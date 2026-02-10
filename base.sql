@@ -18,3 +18,19 @@ INSERT IGNORE INTO users (name, email) VALUES
 ('Mike Davids',    'mikedavids@gmail.com'),
 ('Emilie Brown',   'emiliebrown@gmail.com'),
 ('David Wilson',   'davidwilson@gmail.com');
+
+INSERT IGNORE INTO categories (nom) VALUES
+('Electronics'),
+('Books'),
+('Clothing'),
+('Home & Garden'),
+('Toys & Games');
+
+INSERT INTO objets (id_user, image_objet, descri_objet, prix_estime, id_categorie) VALUES
+(1, 'image1.jpg', 'Description de l\'objet 1', 100.00, 1),
+(2, 'image2.jpg', 'Description de l\'objet 2', 150.00, 2),
+(3, 'image3.jpg', 'Description de l\'objet 3', 200.00, 3),
+(4, 'image4.jpg', 'Description de l\'objet 4', 250.00, 4),
+(5, 'image5.jpg', 'Description de l\'objet 5', 300.00, 5),
+(1, 'image6.jpg', 'Description de l\'objet 6', 120.00, 1),
+(2, 'image7.jpg', 'Description de l\'objet 7', 180.00, 2);
