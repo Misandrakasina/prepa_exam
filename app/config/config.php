@@ -63,7 +63,7 @@ $app->set('csp_nonce', $nonce);
  **********************************************/
 return [
     'database' => [
-        'host'     => 'localhost',           // ou '127.0.0.1' ou l'IP de ton serveur
+        'host'     => '127.0.0.1',           // ou '127.0.0.1' ou l'IP de ton serveur
         'dbname'   => 'message',      // ← change ici
         'user'     => 'root',     // souvent 'root' en local
         'password' => '',    // ← mets le vrai mot de passe

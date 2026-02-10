@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS objets (
     id_user  INT NOT NULL,
     prix_estime DECIMAL(10, 2) NOT NULL,
     id_categorie INT NOT NULL,
+    image_path VARCHAR(255),
     FOREIGN KEY (id_user) REFERENCES users(id),
     FOREIGN KEY (id_categorie) REFERENCES categories(id)
 );
