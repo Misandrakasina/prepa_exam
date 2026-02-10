@@ -31,6 +31,33 @@ Flight::route('GET /dashboard', function () {
     }
 });
 
+// Route pour servir les assets de views/assets/
+Flight::route('GET /views/assets/images/*', function() {
+    $uri = Flight::request()->url;
+    $file = basename($uri);
+    $path = __DIR__ . '/../views/assets/images/' . $file;
+    if (file_exists($path)) {
+        $mime = mime_content_type($path);
+        header('Content-Type: ' . $mime);
+        readfile($path);
+        return;
+    }
+    Flight::notFound();
+});
+
+Flight::route('GET /views/assets/inc/*', function() {
+    $uri = Flight::request()->url;
+    $file = basename($uri);
+    $path = __DIR__ . '/../views/assets/inc/' . $file;
+    if (file_exists($path)) {
+        $mime = mime_content_type($path);
+        header('Content-Type: ' . $mime);
+        readfile($path);
+        return;
+    }
+    Flight::notFound();
+});
+
 // ================================================
 // 3. Route dynamique pour les autres pages
 // ================================================
@@ -90,28 +117,5 @@ Flight::route('GET /test-db', function() use ($app) {
         ]);
     } catch (Exception $ex) {
         $app->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
-    }
-});
-
-// Route pour servir les images de views/images/
-Flight::route('GET /assets/images/@file', function($file) {
-    $path = __DIR__ . '/../assets/images/' . $file;
-    if (file_exists($path)) {
-        $mime = mime_content_type($path);
-        header('Content-Type: ' . $mime);
-        readfile($path);
-    } else {
-        Flight::notFound();
-    }
-});
-// Route pour servir les assets de views/assets/
-Flight::route('GET /views/assets/@type/@file', function($type, $file) {
-    $path = __DIR__ . '/../views/assets/' . $type . '/' . $file;
-    if (file_exists($path)) {
-        $mime = mime_content_type($path);
-        header('Content-Type: ' . $mime);
-        readfile($path);
-    } else {
-        Flight::notFound();
     }
 });
