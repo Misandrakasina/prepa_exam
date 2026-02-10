@@ -59,9 +59,9 @@
                 <div class="container-fluid">
                     <!-- Logo/Brand - Now first on the left -->
                     <a class="navbar-brand d-flex align-items-center" href="/index">
-                        <img src="/assets/images/logo.svg" alt="Logo" height="32"
+                        <img src="/views/assets/images/logo.png"  height="32"
                             class="d-inline-block align-text-top me-2">
-                        <h1 class="h4 mb-0 fw-bold text-primary">Metis</h1>
+                        <h1 class="h4 mb-0 fw-bold text-primary">Exchange</h1>
                     </a>
 
                     <!-- Sidebar Toggle -->

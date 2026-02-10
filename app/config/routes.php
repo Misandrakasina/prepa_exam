@@ -92,3 +92,26 @@ Flight::route('GET /test-db', function() use ($app) {
         $app->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
     }
 });
+
+// Route pour servir les images de views/images/
+Flight::route('GET /assets/images/@file', function($file) {
+    $path = __DIR__ . '/../assets/images/' . $file;
+    if (file_exists($path)) {
+        $mime = mime_content_type($path);
+        header('Content-Type: ' . $mime);
+        readfile($path);
+    } else {
+        Flight::notFound();
+    }
+});
+// Route pour servir les assets de views/assets/
+Flight::route('GET /views/assets/@type/@file', function($type, $file) {
+    $path = __DIR__ . '/../views/assets/' . $type . '/' . $file;
+    if (file_exists($path)) {
+        $mime = mime_content_type($path);
+        header('Content-Type: ' . $mime);
+        readfile($path);
+    } else {
+        Flight::notFound();
+    }
+});
