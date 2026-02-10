@@ -427,38 +427,41 @@
 
     <!-- Page-specific Component -->
 <script>
-    document.querySelector('form').addEventListener('submit', async function(e) {
-        e.preventDefault();
+document.querySelector('form').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-        const email = document.querySelector('input[name="email"]').value;
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'alert mt-3';
-        document.querySelector('.card-body').appendChild(messageDiv);
+    const email = document.querySelector('input[name="email"]').value;
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'alert mt-3';
+    document.querySelector('.card-body').appendChild(messageDiv);
 
-        try {
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
-            });
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
 
-            const result = await response.json();
+        const result = await response.json();
 
-            if (result.success) {
-                messageDiv.classList.add('alert-success');
-                messageDiv.textContent = result.message + ' → Redirection vers le dashboard...';
-                setTimeout(() => {
-                    window.location.href = result.redirect || '/dashboard';
-                }, 1500);
-            } else {
-                messageDiv.classList.add('alert-danger');
-                messageDiv.textContent = result.message;
-            }
-        } catch (err) {
+        if (result.success) {
+            messageDiv.classList.add('alert-success');
+            messageDiv.textContent = result.message + ' → Redirection...';
+
+            localStorage.setItem('userEmail', email);   // ← important
+
+            setTimeout(() => {
+                window.location.href = '/dashboard';
+            }, 1500);
+        } else {
             messageDiv.classList.add('alert-danger');
-            messageDiv.textContent = 'Erreur réseau : ' + err;
+            messageDiv.textContent = result.message;
         }
-    });
+    } catch (err) {
+        messageDiv.classList.add('alert-danger');
+        messageDiv.textContent = 'Erreur réseau';
+    }
+});
 </script>
     <!-- Main App Script -->
 
