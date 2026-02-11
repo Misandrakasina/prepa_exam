@@ -52,7 +52,50 @@
 
     <!-- Main Wrapper -->
     <div class="admin-wrapper" id="admin-wrapper">
-
+<!-- Portfolio Hero Header - style Freya Moore inspired -->
+<section class="portfolio-hero bg-white border-bottom" style="padding: 5rem 0; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      
+      <!-- Texte à gauche -->
+      <div class="col-lg-6">
+        <h1 class="display-4 fw-bold text-dark mb-3" style="line-height: 1.1;">
+          Freya<br>Moore
+        </h1>
+        <h2 class="h3 fw-medium text-primary mb-4" style="letter-spacing: 1px;">
+          DESIGNER & ART DIRECTOR
+        </h2>
+        <p class="lead text-muted mb-4" style="max-width: 480px;">
+          Création d'identités visuelles percutantes • Direction artistique • Branding & expérience utilisateur
+        </p>
+        
+        <div class="d-flex flex-wrap gap-3">
+          <a href="mailto:hello@freyamoore.com" class="btn btn-primary btn-lg px-4 py-3">
+            Email Me
+            <i class="bi bi-envelope ms-2"></i>
+          </a>
+          <a href="#" class="btn btn-outline-secondary btn-lg px-4 py-3">
+            Voir le portfolio
+            <i class="bi bi-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Image à droite (remplace par ta vraie image) -->
+      <div class="col-lg-6 text-center text-lg-end">
+        <img 
+          src="/assets/images/exchange.jpeg" 
+          class="img-fluid rounded-3 shadow-lg" 
+          style="max-height: 480px; object-fit: cover;"
+        >
+        <!-- Si tu n'as pas encore d'image, tu peux utiliser une placeholder orange comme sur beaucoup de templates :
+             src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800" 
+             ou une paire de jambes / création artistique orange -->
+      </div>
+      
+    </div>
+  </div>
+</section>
         <!-- Header -->
         <header class="admin-header">
             <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
