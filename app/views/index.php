@@ -52,50 +52,7 @@
 
     <!-- Main Wrapper -->
     <div class="admin-wrapper" id="admin-wrapper">
-<!-- Portfolio Hero Header - style Freya Moore inspired -->
-<section class="portfolio-hero bg-white border-bottom" style="padding: 5rem 0; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      
-      <!-- Texte à gauche -->
-      <div class="col-lg-6">
-        <h1 class="display-4 fw-bold text-dark mb-3" style="line-height: 1.1;">
-          Freya<br>Moore
-        </h1>
-        <h2 class="h3 fw-medium text-primary mb-4" style="letter-spacing: 1px;">
-          DESIGNER & ART DIRECTOR
-        </h2>
-        <p class="lead text-muted mb-4" style="max-width: 480px;">
-          Création d'identités visuelles percutantes • Direction artistique • Branding & expérience utilisateur
-        </p>
-        
-        <div class="d-flex flex-wrap gap-3">
-          <a href="mailto:hello@freyamoore.com" class="btn btn-primary btn-lg px-4 py-3">
-            Email Me
-            <i class="bi bi-envelope ms-2"></i>
-          </a>
-          <a href="#" class="btn btn-outline-secondary btn-lg px-4 py-3">
-            Voir le portfolio
-            <i class="bi bi-arrow-right ms-2"></i>
-          </a>
-        </div>
-      </div>
-      
-      <!-- Image à droite (remplace par ta vraie image) -->
-      <div class="col-lg-6 text-center text-lg-end">
-        <img 
-          src="/assets/images/exchange.jpeg" 
-          class="img-fluid rounded-3 shadow-lg" 
-          style="max-height: 480px; object-fit: cover;"
-        >
-        <!-- Si tu n'as pas encore d'image, tu peux utiliser une placeholder orange comme sur beaucoup de templates :
-             src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800" 
-             ou une paire de jambes / création artistique orange -->
-      </div>
-      
-    </div>
-  </div>
-</section>
+
         <!-- Header -->
         <header class="admin-header">
             <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
@@ -383,6 +340,7 @@
                         <h1 class="h3 mb-0">Dashboard</h1>
                         <p class="text-muted mb-0">Welcome back! Here's what's happening.</p>
                     </div>
+
                     <div class="d-flex gap-2 flex-shrink-0">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#newItemModal">
@@ -404,239 +362,64 @@
                     </div>
                 </div>
 
-                <!-- Stats Cards with Alpine.js -->
-                <div class="row g-3 g-lg-4 mb-4">
-                    <div class="col-sm-6 col-xl-3" x-data="statsCounter(12426, 5)">
-                        <div class="card stats-card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="stats-icon bg-primary bg-opacity-10 text-primary">
-                                            <i class="bi bi-people"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h6 class="mb-0 text-muted">Total Users</h6>
-                                        <h3 class="mb-0" x-text="value.toLocaleString()" data-stat-value>12,426</h3>
-                                        <small class="text-success">
-                                            <i class="bi bi-arrow-up"></i> +12.5%
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!-- Portfolio Hero Header - IMAGE QUI REMPLIT VRAIMENT 100% DE LA COLONNE DROITE -->
+<section class="portfolio-hero border-bottom" style="padding: 7rem 0; min-height: 80vh; display: flex; align-items: stretch; background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);">
+  <div class="container h-100">
+    <div class="row align-items-stretch g-0">  <!-- Pas d'espace entre les colonnes -->
 
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="card stats-card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="stats-icon bg-success bg-opacity-10 text-success">
-                                            <i class="bi bi-graph-up"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h6 class="mb-0 text-muted">Revenue</h6>
-                                        <h3 class="mb-0">$54,320</h3>
-                                        <small class="text-success">
-                                            <i class="bi bi-arrow-up"></i> +8.2%
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <!-- Texte à gauche - centré verticalement -->
+      <div class="col-lg-6 d-flex flex-column justify-content-center px-4 px-lg-5 py-5 py-lg-0">
+        <h1 class="display-3 fw-bold text-dark mb-3" style="line-height: 1;">
+          Exchange
+        </h1>
+        <h2 class="h2 fw-semibold text-primary mb-4" style="letter-spacing: 2px;">
+          ÉCHANGEZ VOS OBJETS
+        </h2>
+        <p class="lead text-muted mb-5" style="max-width: 480px; font-size: 1.3rem;">
+          Découvrez une communauté d'échange • Donnez une seconde vie à vos objets • Trouvez ce dont vous avez besoin gratuitement
+        </p>
 
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="card stats-card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="stats-icon bg-warning bg-opacity-10 text-warning">
-                                            <i class="bi bi-bag-check"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h6 class="mb-0 text-muted">Orders</h6>
-                                        <h3 class="mb-0">1,852</h3>
-                                        <small class="text-danger">
-                                            <i class="bi bi-arrow-down"></i> -2.1%
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="product.php" class="btn btn-primary btn-lg px-5 py-3 fw-medium shadow-sm">
+            Explorer les objets <i class="bi bi-search ms-2"></i>
+          </a>
+          <a href="/forms" class="btn btn-outline-secondary btn-lg px-5 py-3 fw-medium">
+            Proposer un échange <i class="bi bi-arrow-right ms-2"></i>
+          </a>
+        </div>
+      </div>
 
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="card stats-card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0">
-                                        <div class="stats-icon bg-info bg-opacity-10 text-info">
-                                            <i class="bi bi-clock-history"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h6 class="mb-0 text-muted">Avg. Response</h6>
-                                        <h3 class="mb-0">2.3s</h3>
-                                        <small class="text-success">
-                                            <i class="bi bi-arrow-up"></i> +5.4%
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <!-- Colonne image : remplit TOUT (hauteur + largeur) -->
+      <div class="col-lg-6 position-relative overflow-hidden" style="min-height: 600px; height: 100%;">
+        <img
+          src="/assets/images/exchange2.jpeg"
+          alt="Freya Moore artistic portrait"
+          class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+          style="object-position: center; z-index: 1;"
+        >
+        <!-- Suggestions d'images placeholder dans le style Freya Moore (tons orange/chauds, artistique, jambes ou pose élégante) :
+             → https://thumbs.dreamstime.com/b/love-relationship-online-dating-attractive-woman-closed-eyes-digital-neon-filter-lights-body-over-orange-background-275730759.jpg
+             → Une recherche Unsplash/Pexels avec "artistic female legs orange sunset lighting" donne souvent de très bons résultats
+             → Ou utilise directement une de tes photos cropée verticalement -->
+      </div>
 
-                <!-- Chart Section -->
-                <div class="row g-4 mb-4">
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">Revenue Overview</h5>
-                                <div class="btn-group btn-group-sm" role="group">
-                                    <button type="button" class="btn btn-outline-primary active"
-                                        data-chart-period="7d">7D</button>
-                                    <button type="button" class="btn btn-outline-primary"
-                                        data-chart-period="30d">30D</button>
-                                    <button type="button" class="btn btn-outline-primary"
-                                        data-chart-period="90d">90D</button>
-                                    <button type="button" class="btn btn-outline-primary"
-                                        data-chart-period="1y">1Y</button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="revenueChart" height="250"></canvas>
-                            </div>
-                        </div>
-                    </div>
+    </div>
+  </div>
+</section>
 
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Recent Activity</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="activity-feed">
-                                    <div class="activity-item">
-                                        <div class="activity-icon bg-primary bg-opacity-10 text-primary">
-                                            <i class="bi bi-person-plus"></i>
-                                        </div>
-                                        <div class="activity-content">
-                                            <p class="mb-1">New user registered</p>
-                                            <small class="text-muted">2 minutes ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="activity-item">
-                                        <div class="activity-icon bg-success bg-opacity-10 text-success">
-                                            <i class="bi bi-bag-check"></i>
-                                        </div>
-                                        <div class="activity-content">
-                                            <p class="mb-1">Order #1234 completed</p>
-                                            <small class="text-muted">5 minutes ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="activity-item">
-                                        <div class="activity-icon bg-warning bg-opacity-10 text-warning">
-                                            <i class="bi bi-exclamation-triangle"></i>
-                                        </div>
-                                        <div class="activity-content">
-                                            <p class="mb-1">Server maintenance scheduled</p>
-                                            <small class="text-muted">1 hour ago</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Additional Charts Row -->
-                <div class="row g-4 mb-4">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">User Growth (Last 7 Days)</h5>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="userGrowthChart" height="200"></canvas>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Order Status Distribution</h5>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="orderStatusChart" height="200"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- New Widgets Row -->
-                <div class="row g-4 mb-4">
-                    <!-- Recent Orders -->
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Recent Orders</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover mb-0">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Order ID</th>
-                                                <th>Customer</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="recent-orders-table">
-                                            <!-- Orders will be injected here by dashboard.js -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Storage Status -->
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Storage Status</h5>
-                            </div>
-                            <div class="card-body">
-                                <div id="storageStatusChart"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Sales by Location -->
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Sales by Location</h5>
-                            </div>
-                            <div class="card-body">
-                                <div id="salesByLocationChart" style="min-height: 400px; width: 100%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
-        </main>
+
+
+
+
+
+
+
 
         <!-- Footer -->
         <footer class="admin-footer">

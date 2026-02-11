@@ -32,10 +32,8 @@ Flight::route('GET /dashboard', function () {
 });
 
 // Route pour servir les assets de views/assets/
-Flight::route('GET /views/assets/images/*', function() {
-    $uri = Flight::request()->url;
-    $file = basename($uri);
-    $path = __DIR__ . '/../views/assets/images/' . $file;
+Flight::route('GET /views/assets/images/@filename', function($filename) {
+    $path = __DIR__ . '/../views/assets/images/' . $filename;
     if (file_exists($path)) {
         $mime = mime_content_type($path);
         header('Content-Type: ' . $mime);
@@ -72,6 +70,17 @@ Flight::route('GET /@page', function ($page) {
         }
     }
     Flight::notFound('<h1>Page non trouvée : ' . htmlspecialchars($page) . '</h1>');
+});
+
+// Route spécifique pour product.php qui sert products.html
+Flight::route('GET /product.php', function () {
+    $path = __DIR__ . '/../views/products.html';
+    if (file_exists($path)) {
+        header('Content-Type: text/html; charset=utf-8');
+        echo file_get_contents($path);
+        return;
+    }
+    Flight::notFound('<h1>Page products.html non trouvée</h1>');
 });
 
 // ================================================
