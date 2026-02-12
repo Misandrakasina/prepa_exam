@@ -380,7 +380,7 @@
         </p>
 
         <div class="d-flex flex-wrap gap-3">
-          <a href="product.php" class="btn btn-primary btn-lg px-5 py-3 fw-medium shadow-sm">
+          <a href="/products" class="btn btn-primary btn-lg px-5 py-3 fw-medium shadow-sm">
             Explorer les objets <i class="bi bi-search ms-2"></i>
           </a>
           <a href="/forms" class="btn btn-outline-secondary btn-lg px-5 py-3 fw-medium">

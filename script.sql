@@ -1,3 +1,4 @@
+-- Active: 1770563180943@@127.0.0.1@3306@message
 CREATE DATABASE IF NOT EXISTS message;
 
 USE message;
