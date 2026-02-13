@@ -99,4 +99,40 @@ class ApiExampleController
             $this->app->json(['success' => false, 'message' => 'Aucune modification'], 404);
         }
     }
+    // ====================== SITE USER ======================
+public function getUserSite($email)
+{
+    try {
+        $user = $this->db()->fetchRow(
+            "SELECT id, name FROM users WHERE email = ?",
+            [$email]
+        );
+
+        if (!$user) {
+            $this->app->json(['error' => 'Utilisateur non trouvé'], 404);
+            return;
+        }
+
+        $objets = $this->db()->fetchAll(
+            "SELECT o.id_objet, o.prix_estime, o.image_path,
+                    c.nom AS categorie
+             FROM objets o
+             JOIN categories c ON o.id_categorie = c.id
+             WHERE o.id_user = ?
+             ORDER BY c.nom",
+            [$user['id']]
+        );
+
+        $this->app->json([
+            'user'   => $user,
+            'objets' => $objets
+        ]);
+    } catch (Exception $ex) {
+        $this->app->json([
+            'error' => 'Erreur serveur',
+            'message' => $ex->getMessage()
+        ], 500);
+    }
+}
+
 }

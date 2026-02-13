@@ -59,23 +59,7 @@ Flight::route('GET /views/assets/inc/*', function() {
 });
 
 // ================================================
-// 3. Route dynamique pour les autres pages
-// ================================================
-Flight::route('GET /@page', function ($page) {
-    $extensions = ['.html', '.php'];
-    foreach ($extensions as $ext) {
-        $path = __DIR__ . '/../views/' . $page . $ext;
-        if (file_exists($path)) {
-            header('Content-Type: text/html; charset=utf-8');
-            echo file_get_contents($path);
-            return;
-        }
-    }
-    Flight::notFound('<h1>Page non trouvée : ' . htmlspecialchars($page) . '</h1>');
-});
-
-// ================================================
-// 4. Routes API
+// 3. Routes API
 // ================================================
 Flight::route('POST /api/login', [$controller, 'login']);
 Flight::route('GET /api/users', [$controller, 'getUsers']);
@@ -118,4 +102,21 @@ Flight::route('GET /test-db', function() use ($app) {
     } catch (Exception $ex) {
         $app->json(['status' => 'error', 'message' => $ex->getMessage()], 500);
     }
+});
+Flight::route('GET /api/site/@email', function($email) use ($controller) {
+    $controller->getUserSite($email);
+});
+
+
+Flight::route('GET /@page', function ($page) {
+    $extensions = ['.html', '.php'];
+    foreach ($extensions as $ext) {
+        $path = __DIR__ . '/../views/' . $page . $ext;
+        if (file_exists($path)) {
+            header('Content-Type: text/html; charset=utf-8');
+            echo file_get_contents($path);
+            return;
+        }
+    }
+    Flight::notFound('<h1>Page non trouvée : ' . htmlspecialchars($page) . '</h1>');
 });

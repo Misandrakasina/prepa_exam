@@ -1,0 +1,62 @@
+.hero {
+    background-attachment: fixed;
+}
+
+.product-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+}
+
+.btn-primary, .btn-dark {
+    transition: all 0.3s;
+}
+.text-shadow {
+    text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.bg-gradient-light {
+    background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+}
+
+.hero .btn-primary {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+.hero .btn-primary:hover {
+    background-color: #5a32a3;
+    border-color: #5a32a3;
+}
+.product-card {
+    transition: 0.3s ease;
+    border-radius: 20px;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+}
+
+.product-card img {
+    transition: 0.4s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.category-block h3 {
+    font-size: 1.6rem;
+}
+
+.btn-outline-dark {
+    transition: 0.3s;
+}
+
+.btn-outline-dark:hover {
+    background: black;
+    color: white;
+}

@@ -23,7 +23,7 @@ $app = Flight::app();
  * P.S. When you require a php file and that file returns an array, the array
  * will be returned by the require statement where you can assign it to a var.
  */
-$config = require('config.php');
+$config = require __DIR__ . $ds . 'config.php';
 
 /*
  * Load the services file.
@@ -40,7 +40,7 @@ $config = require('config.php');
  * That's a discussion for another day. Suffice to say, that Flight has a basic concept
  * of a services container by registering classes to the Engine class.
  */ 
-require('services.php');
+require __DIR__ . $ds . 'services.php';
 
 // Whip out the ol' router and we'll pass that to the routes file
 $router = $app->router();
