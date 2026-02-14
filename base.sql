@@ -1,15 +1,5 @@
--- Active: 1770563180943@@127.0.0.1@3306@message
--- 1. Créer la base (si elle n'existe pas encore)
-CREATE DATABASE IF NOT EXISTS message;
--- 2. Utiliser la base
-USE message;
 
--- 3. Créer la table (version minimale comme tu voulais)
-CREATE TABLE IF NOT EXISTS users (
-    id    INT AUTO_INCREMENT PRIMARY KEY,
-    name  VARCHAR(100) NOT NULL,
-    email VARCHAR(150) NOT NULL UNIQUE
-);
+
 
 -- 4. Insérer les données de test (sans doublons grâce à IGNORE)
 INSERT IGNORE INTO users (name, email) VALUES
@@ -19,18 +9,43 @@ INSERT IGNORE INTO users (name, email) VALUES
 ('Emilie Brown',   'emiliebrown@gmail.com'),
 ('David Wilson',   'davidwilson@gmail.com');
 
+-- Insérer les données de test pour les catégories
 INSERT IGNORE INTO categories (nom) VALUES
-('Electronics'),
-('Books'),
-('Clothing'),
-('Home & Garden'),
-('Toys & Games');
+('Électronique'),
+('Chaussures'),
+('Livres'),
+('Sac'),
+('vêtements');
 
-INSERT INTO objets (id_user, image_objet, descri_objet, prix_estime, id_categorie) VALUES
-(1, 'image1.jpg', 'Description de l\'objet 1', 100.00, 1),
-(2, 'image2.jpg', 'Description de l\'objet 2', 150.00, 2),
-(3, 'image3.jpg', 'Description de l\'objet 3', 200.00, 3),
-(4, 'image4.jpg', 'Description de l\'objet 4', 250.00, 4),
-(5, 'image5.jpg', 'Description de l\'objet 5', 300.00, 5),
-(1, 'image6.jpg', 'Description de l\'objet 6', 120.00, 1),
-(2, 'image7.jpg', 'Description de l\'objet 7', 180.00, 2);
+-- Insérer les données de test pour les objets
+INSERT IGNORE INTO objets (id_user, prix_estime, id_categorie, image_path) VALUES
+-- Utilisateur 1 (Jones Smith)
+(1, 299.99, 1, '/assets/images/aspi1.jpeg'),
+(1, 49.99, 2, '/assets/images/chauss2.jpeg'),
+(1, 19.99, 1, '/assets/images/aspi3.jpeg'),
+(1, 149.99, 3, '/assets/images/liv2.jpeg'),
+(1, 99.99, 1, '/assets/images/aspi3.jpeg'),
+-- Utilisateur 2 (Sarah Johnson)
+(2, 199.99, 2, '/assets/images/chauss1.jpeg'),
+(2, 39.99, 2, '/assets/images/chauss2.jpeg'),
+(2, 29.99, 4, '/assets/images/sac3.jpeg'),
+(2, 129.99, 4, '/assets/images/sac1.jpeg'),
+(2, 89.99, 5, '/assets/images/nike1.jpeg'),
+-- Utilisateur 3 (Mike Davids)
+(3, 399.99, 1, '/assets/images/liv1.png'),
+(3, 59.99, 5, '/assets/images/nike2.jpeg'),
+(3, 24.99, 5, '/assets/images/nike3.jpeg'),
+(3, 159.99, 2, '/assets/images/chauss3.png'),
+(3, 109.99, 5, '/assets/images/sac2.jpeg'),
+-- Utilisateur 4 (Emilie Brown)
+(4, 249.99, 5, '/assets/images/nike1.jpeg'),
+(4, 44.99, 2, '/assets/images/sac1.jpeg'),
+(4, 14.99, 3, '/assets/images/liv3.jpeg'),
+(4, 139.99, 2, '/assets/images/chauss1.jpeg'),
+(4, 79.99, 1, '/assets/images/aspi2.jpeg'),
+-- Utilisateur 5 (David Wilson)
+(5, 349.99, 4, '/assets/images/sac1.jpeg'),
+(5, 54.99, 4, '/assets/images/sac2.jpeg'),
+(5, 34.99, 4, '/assets/images/sac3.jpeg'),
+(5, 169.99, 4, '/assets/images/sac1.jpeg'),
+(5, 119.99, 4, '/assets/images/sac2.jpeg');

@@ -17,19 +17,10 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS objets (
     id_objet INT AUTO_INCREMENT PRIMARY KEY,
     id_user  INT NOT NULL,
-    image_objet VARCHAR(100) NOT NULL,
-    descri_objet VARCHAR(150) NOT NULL,
     prix_estime DECIMAL(10, 2) NOT NULL,
     id_categorie INT NOT NULL,
+    image_path VARCHAR(255),
     FOREIGN KEY (id_user) REFERENCES users(id),
     FOREIGN KEY (id_categorie) REFERENCES categories(id)
 );
 
-CREATE TABLE IF NOT EXISTS echange (
-    id_echange INT AUTO_INCREMENT PRIMARY KEY,
-    id_objet INT NOT NULL,
-    id_user INT NOT NULL,
-    date_echange DATE NOT NULL,
-    FOREIGN KEY (id_objet) REFERENCES objets(id_objet),
-    FOREIGN KEY (id_user) REFERENCES users(id)
-);

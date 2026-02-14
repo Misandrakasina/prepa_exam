@@ -99,4 +99,61 @@ class ApiExampleController
             $this->app->json(['success' => false, 'message' => 'Aucune modification'], 404);
         }
     }
+
+    // ====================== Objets/Produits ======================
+
+    /**
+     * Récupère tous les objets groupés par utilisateur
+     * GET /api/objets-par-utilisateur
+     */
+    public function getObjetsByUser()
+    {
+        try {
+            $objets = $this->db()->fetchAll("
+                SELECT o.id_objet AS id,
+                       o.prix_estime AS price,
+                       o.image_path AS image,
+                       o.id_user,
+                       u.name AS userName,
+                       u.email AS userEmail,
+                       c.nom AS category
+                FROM objets o
+                JOIN users u ON o.id_user = u.id
+                JOIN categories c ON o.id_categorie = c.id
+                ORDER BY u.name, o.id_objet
+            ");
+
+            // Grouper les objets par utilisateur
+            $result = [];
+            foreach ($objets as $objet) {
+                $userId = $objet['id_user'];
+                if (!isset($result[$userId])) {
+                    $result[$userId] = [
+                        'user' => [
+                            'id'    => (int) $userId,
+                            'name'  => $objet['userName'],
+                            'email' => $objet['userEmail'],
+                        ],
+                        'objets' => [],
+                    ];
+                }
+                $result[$userId]['objets'][] = [
+                    'id'       => (int) $objet['id'],
+                    'price'    => (float) $objet['price'],
+                    'image'    => $objet['image'],
+                    'category' => $objet['category'],
+                ];
+            }
+
+            $this->app->json([
+                'success' => true,
+                'data'    => array_values($result),
+            ]);
+        } catch (\Exception $e) {
+            $this->app->json([
+                'success' => false,
+                'message' => 'Erreur lors de la récupération des objets : ' . $e->getMessage(),
+            ], 500);
+        }
+    }
 }

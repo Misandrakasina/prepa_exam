@@ -19,6 +19,9 @@
     <!-- Preload critical fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- ApexCharts CDN -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>  <script type="module" crossorigin src="/assets/vendor-bootstrap-C9iorZI5.js"></script>
@@ -40,8 +43,8 @@
                     <div class="container-fluid">
                         <!-- Logo/Brand -->
                         <a class="navbar-brand d-flex align-items-center" href="./index">
-                            <img src="/assets/images/logo.svg" alt="Logo" height="32" class="d-inline-block align-text-top me-2">
-                            <h1 class="h4 mb-0 fw-bold text-primary">Metis</h1>
+                            <img src="/assets/images/logo.png" alt="Logo" height="32" class="d-inline-block align-text-top me-2">
+                            <h1 class="h4 mb-0 fw-bold text-primary">Exchange</h1>
                         </a>
 
                         <!-- Sidebar Toggle -->
@@ -322,8 +325,8 @@
                     <!-- Page Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4 mb-lg-5">
                         <div>
-                            <h1 class="h3 mb-0">Product Management</h1>
-                            <p class="text-muted mb-0">Manage your product catalog and inventory</p>
+                            <h1 class="h3 mb-0">Product Exchange</h1>
+                            <p class="text-muted mb-0">Here you can manage your product listings and exchanges.</p>
                         </div>
                         <div class="d-flex gap-2">
                             <button type="button" class="btn btn-outline-secondary" @click="exportProducts()">
@@ -338,137 +341,16 @@
                         </div>
                     </div>
 
-                    <!-- Product Management Container -->
-                    <div x-data="productTable" x-init="init()">
-                        
-                        <!-- Product Stats Widgets -->
-                        <div class="row g-4 g-lg-5 mb-5">
-                            <div class="col-xl-3 col-lg-6">
-                                <div class="card stats-card">
-                                    <div class="card-body p-3 p-lg-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="stats-icon bg-primary bg-opacity-10 text-primary me-3">
-                                                <i class="bi bi-box"></i>
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-0 text-muted">Total Products</h6>
-                                                <h3 class="mb-0" x-text="stats.total"></h3>
-                                                <small class="text-success">
-                                                    <i class="bi bi-arrow-up"></i> +5% from last month
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6">
-                                <div class="card stats-card">
-                                    <div class="card-body p-3 p-lg-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="stats-icon bg-success bg-opacity-10 text-success me-3">
-                                                <i class="bi bi-check-circle"></i>
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-0 text-muted">In Stock</h6>
-                                                <h3 class="mb-0" x-text="stats.inStock"></h3>
-                                                <small class="text-success">
-                                                    <i class="bi bi-arrow-up"></i> Well stocked
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6">
-                                <div class="card stats-card">
-                                    <div class="card-body p-3 p-lg-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="stats-icon bg-warning bg-opacity-10 text-warning me-3">
-                                                <i class="bi bi-exclamation-triangle"></i>
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-0 text-muted">Low Stock</h6>
-                                                <h3 class="mb-0" x-text="stats.lowStock"></h3>
-                                                <small class="text-warning">
-                                                    <i class="bi bi-exclamation-circle"></i> Needs attention
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6">
-                                <div class="card stats-card">
-                                    <div class="card-body p-3 p-lg-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="stats-icon bg-info bg-opacity-10 text-info me-3">
-                                                <i class="bi bi-currency-dollar"></i>
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-0 text-muted">Total Value</h6>
-                                                <h3 class="mb-0" x-text="`$${stats.totalValue.toLocaleString()}`"></h3>
-                                                <small class="text-info">
-                                                    <i class="bi bi-info-circle"></i> Inventory value
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Charts Row -->
-                        <div class="row g-4 g-lg-5 mb-5">
-                            <!-- Sales Performance Chart -->
-                            <div class="col-lg-8">
-                                <div class="card h-100">
-                                    <div class="card-header d-flex justify-content-between align-items-center">
-                                        <h5 class="card-title mb-0">Sales Performance</h5>
-                                        <div class="btn-group btn-group-sm" role="group">
-                                            <input type="radio" class="btn-check" name="salesPeriod" id="sales7d" autocomplete="off" checked>
-                                            <label class="btn btn-outline-secondary" for="sales7d">7D</label>
-                                            <input type="radio" class="btn-check" name="salesPeriod" id="sales30d" autocomplete="off">
-                                            <label class="btn btn-outline-secondary" for="sales30d">30D</label>
-                                            <input type="radio" class="btn-check" name="salesPeriod" id="sales90d" autocomplete="off">
-                                            <label class="btn btn-outline-secondary" for="sales90d">90D</label>
-                                        </div>
-                                    </div>
-                                    <div class="card-body p-3 p-lg-4">
-                                        <div id="salesChart" style="height: 300px;"></div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <!-- Category Distribution -->
-                            <div class="col-lg-4">
-                                <div class="card h-100">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0">Category Distribution</h5>
-                                    </div>
-                                    <div class="card-body p-3 p-lg-4">
-                                        <div id="categoryChart" style="height: 200px;"></div>
-                                        <div class="mt-3">
-                                            <template x-for="category in categoryStats" :key="category.name">
-                                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                                    <span class="small" x-text="category.name"></span>
-                                                    <div class="d-flex align-items-center">
-                                                        <span class="small text-muted me-2" x-text="`${category.percentage}%`"></span>
-                                                        <span class="small fw-medium" x-text="category.count"></span>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <!-- Products Table -->
                         <div class="card">
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <h5 class="card-title mb-0">Product Catalog</h5>
+                                        <h5 class="card-title mb-0"></h5>
                                     </div>
                                     <div class="col-auto">
                                         <div class="d-flex gap-2">
@@ -495,7 +377,7 @@
                                                 <option value="home">Home & Garden</option>
                                             </select>
                                             
-                                            <!-- Stock Filter -->
+                                            <!-- Stock Filter -->                                         
                                             <select class="form-select form-select-sm" 
                                                     x-model="stockFilter" 
                                                     @change="filterProducts()"
@@ -511,75 +393,98 @@
                             </div>
                             <div class="card-body p-3">
                         <!-- Simple display of objects by user -->
-                        <div x-data="objetsParUtilisateur()" class="container-fluid">
+                        <div class="container-fluid">
                             <h4 class="mb-4">Objets par Utilisateur</h4>
 
-                            <div x-show="loading" class="text-center py-4">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Chargement...</span>
-                                </div>
-                            </div>
+                            <?php
+                            // Utiliser l'instance Flight déjà chargée
+                            try {
+                                // Appeler directement la méthode getObjetsByUser (même logique que dans le contrôleur)
+                                $objets = Flight::db()->fetchAll("
+                                    SELECT o.id_objet AS id,
+                                           o.prix_estime AS price,
+                                           o.image_path AS image,
+                                           o.id_user,
+                                           u.name AS userName,
+                                           u.email AS userEmail,
+                                           c.nom AS category
+                                    FROM objets o
+                                    JOIN users u ON o.id_user = u.id
+                                    JOIN categories c ON o.id_categorie = c.id
+                                    ORDER BY u.name, o.id_objet
+                                ");
 
-                            <div x-show="!loading">
-                                <div x-for="userData in objetsData" :key="userData.user.id" class="mb-5">
-                                    <h5 class="text-primary mb-3">
-                                        <i class="bi bi-person-circle me-2"></i>
-                                        <span x-text="userData.user.name"></span>
-                                        <small class="text-muted ms-2" x-text="userData.user.email"></small>
-                                    </h5>
-
-                                    <div class="row g-3">
-                                        <div x-for="objet in userData.objets" :key="objet.id" class="col-md-4 col-lg-3">
-                                            <div class="border rounded p-3 bg-light">
-                                                <div class="text-center mb-2">
-                                                    <img :src="objet.image"
-                                                         class="img-fluid rounded"
-                                                         :alt="'Objet ' + objet.id"
-                                                         style="height: 120px; object-fit: cover;">
-                                                </div>
-                                                <div class="text-center">
-                                                    <strong x-text="'Objet ' + objet.id"></strong><br>
-                                                    <span class="text-success fw-bold" x-text="'$' + objet.price"></span><br>
-                                                    <small class="text-muted" x-text="objet.category"></small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <script>
-                            function objetsParUtilisateur() {
-                                return {
-                                    objetsData: [],
-                                    loading: true,
-
-                                    async init() {
-                                        await this.loadObjets();
-                                    },
-
-                                    async loadObjets() {
-                                        try {
-                                            const response = await fetch('/api/objets-par-utilisateur');
-                                            const result = await response.json();
-
-                                            if (result.success) {
-                                                this.objetsData = result.data;
-                                            } else {
-                                                console.error('Erreur API:', result.message);
-                                                this.objetsData = [];
-                                            }
-                                        } catch (error) {
-                                            console.error('Erreur lors du chargement:', error);
-                                            this.objetsData = [];
-                                        } finally {
-                                            this.loading = false;
-                                        }
+                                // Grouper les objets par utilisateur
+                                $result = [];
+                                foreach ($objets as $objet) {
+                                    $userId = $objet['id_user'];
+                                    if (!isset($result[$userId])) {
+                                        $result[$userId] = [
+                                            'user' => [
+                                                'id'    => (int) $userId,
+                                                'name'  => $objet['userName'],
+                                                'email' => $objet['userEmail'],
+                                            ],
+                                            'objets' => [],
+                                        ];
                                     }
+                                    $result[$userId]['objets'][] = [
+                                        'id'       => (int) $objet['id'],
+                                        'price'    => (float) $objet['price'],
+                                        'image'    => $objet['image'],
+                                        'category' => $objet['category'],
+                                    ];
                                 }
+
+                                // Afficher les données
+                                foreach ($result as $userData) {
+                                    echo '<div class="mb-5">';
+                                    echo '<h5 class="text-primary mb-3">';
+                                    echo '<i class="bi bi-person-circle me-2"></i>';
+                                    echo htmlspecialchars($userData['user']['name']);
+                                    echo '<small class="text-muted ms-2">' . htmlspecialchars($userData['user']['email']) . '</small>';
+                                    echo '</h5>';
+
+                                    echo '<div class="row g-3">';
+                                    foreach ($userData['objets'] as $objet) {
+                                    echo '<div class="col-md-4 col-lg-3 mb-4">';
+                                    echo '<div class="card" style="width: 18rem;">';
+                                    echo '<div class="card-body">';
+
+                                    // Grande image principale
+                                    echo '<img id="mainImage-' . $objet['id'] . '" src="' . htmlspecialchars($objet['image']) . '" ';
+                                    echo 'class="img-fluid mb-3 rounded" ';
+                                    echo 'alt="Objet ' . $objet['id'] . '" ';
+                                    echo 'style="width: 100%; height: 200px; object-fit: cover;">';
+
+                                    // Petites images thumbnails (utilisant la même image pour l'exemple)
+                                    echo '<div class="d-flex justify-content-between mb-3">';
+                                    echo '<img src="' . htmlspecialchars($objet['image']) . '" class="img-thumbnail thumb" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="changeImage(' . $objet['id'] . ', this.src)">';
+                                    echo '<img src="' . htmlspecialchars($objet['image']) . '" class="img-thumbnail thumb" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="changeImage(' . $objet['id'] . ', this.src)">';
+                                    echo '<img src="' . htmlspecialchars($objet['image']) . '" class="img-thumbnail thumb" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="changeImage(' . $objet['id'] . ', this.src)">';
+                                    echo '</div>';
+
+                                    // Informations de l'objet
+                                    echo '<h6 class="card-title">Objet ' . $objet['id'] . '</h6>';
+                                    echo '<p class="card-text">';
+                                    echo '<strong>Utilisateur:</strong> ' . htmlspecialchars($userData['user']['name']) . '<br>';
+                                    echo '<strong>Catégorie:</strong> ' . htmlspecialchars($objet['category']) . '<br>';
+                                    echo '<strong>Prix:</strong> <span class="text-success fw-bold">$ ' . number_format($objet['price'], 2) . '</span>';
+                                    echo '</p>';
+
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    }
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
+
+                            } catch (Exception $e) {
+                                echo '<div class="alert alert-danger">Erreur lors du chargement des objets : ' . htmlspecialchars($e->getMessage()) . '</div>';
                             }
-                        </script>
+                            ?>
+                        </div>
                                                                 <i class="bi bi-three-dots"></i>
                                                             </button>
                                                             <ul class="dropdown-menu">
@@ -632,34 +537,6 @@
 
                 </div>
 
-                <!-- Users Section -->
-                <div class="container-fluid p-4 p-lg-5">
-                    <div x-data="usersTable" x-init="loadUsers()">
-                        <h2 class="h3 mb-4">All Users</h2>
-                        <div class="card">
-                            <div class="card-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <template x-for="user in users" :key="user.id">
-                                            <tr>
-                                                <td x-text="user.id"></td>
-                                                <td x-text="user.name"></td>
-                                                <td x-text="user.email"></td>
-                                            </tr>
-                                        </template>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </main>
 
@@ -668,7 +545,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="mb-0 text-muted">© 2026 Modern Bootstrap Admin Template</p>
+                            <p class="mb-0 text-muted">© ETU003992 ETU004372 ETU00</p>
                         </div>
                         <div class="col-md-6 text-md-end">
                             <p class="mb-0 text-muted">Built with Bootstrap 5 by <a href="https://colorlib.com/" target="_blank" rel="noopener noreferrer">Colorlib</a></p>
@@ -775,137 +652,19 @@
 
     <!-- Page-specific Component -->
 
-    <!-- Script pour charger les données depuis l'API -->
+    <!-- Script pour les objets par utilisateur -->
+    <script>
+        function changeImage(objetId, newSrc) {
+            const mainImage = document.getElementById('mainImage-' + objetId);
+            if (mainImage) {
+                mainImage.src = newSrc;
+            }
+        }
+    </script>
+
+    <!-- Script pour les autres fonctionnalités (sans appel API pour les objets) -->
     <script>
         document.addEventListener('alpine:init', () => {
-            Alpine.data('productTable', () => ({
-                products: [],
-                filteredProducts: [],
-                paginatedProducts: [],
-                searchQuery: '',
-                categoryFilter: '',
-                stockFilter: '',
-                selectedProducts: [],
-                currentPage: 1,
-                itemsPerPage: 12,
-                totalPages: 1,
-
-                async init() {
-                    await this.loadProducts();
-                    this.filterProducts();
-                },
-
-                async loadProducts() {
-                    try {
-                        const response = await fetch('/api/objets-par-utilisateur');
-                        const result = await response.json();
-                        
-                        if (result.success) {
-                            // Aplatir les données groupées par utilisateur
-                            this.products = [];
-                            result.data.forEach(userData => {
-                                userData.objets.forEach(objet => {
-                                    this.products.push({
-                                        id: objet.id,
-                                        name: `Objet ${objet.id}`, // Nom générique
-                                        price: objet.price,
-                                        image: objet.image,
-                                        category: objet.category,
-                                        stock: Math.floor(Math.random() * 50) + 1, // Stock aléatoire
-                                        status: 'published', // Statut par défaut
-                                        created: new Date().toISOString().split('T')[0], // Date actuelle
-                                        userName: userData.user.name,
-                                        userEmail: userData.user.email,
-                                        userAvatar: '/assets/images/avatar-placeholder.svg' // Avatar par défaut
-                                    });
-                                });
-                            });
-                        } else {
-                            console.error('Erreur API:', result.message);
-                            this.products = [];
-                        }
-                    } catch (error) {
-                        console.error('Erreur lors du chargement des produits:', error);
-                        this.products = [];
-                    }
-                },
-
-                filterProducts() {
-                    this.filteredProducts = this.products.filter(product => {
-                        const matchesSearch = !this.searchQuery || 
-                            product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                            product.category.toLowerCase().includes(this.searchQuery.toLowerCase());
-                        
-                        const matchesCategory = !this.categoryFilter || product.category === this.categoryFilter;
-                        
-                        const matchesStock = !this.stockFilter || this.checkStockFilter(product, this.stockFilter);
-                        
-                        return matchesSearch && matchesCategory && matchesStock;
-                    });
-                    
-                    this.totalPages = Math.ceil(this.filteredProducts.length / this.itemsPerPage);
-                    this.currentPage = 1;
-                    this.updatePagination();
-                },
-
-                checkStockFilter(product, filter) {
-                    switch(filter) {
-                        case 'in-stock': return product.stock > 20;
-                        case 'low-stock': return product.stock > 0 && product.stock <= 20;
-                        case 'out-of-stock': return product.stock === 0;
-                        default: return true;
-                    }
-                },
-
-                updatePagination() {
-                    const start = (this.currentPage - 1) * this.itemsPerPage;
-                    const end = start + this.itemsPerPage;
-                    this.paginatedProducts = this.filteredProducts.slice(start, end);
-                },
-
-                goToPage(page) {
-                    if (page >= 1 && page <= this.totalPages) {
-                        this.currentPage = page;
-                        this.updatePagination();
-                    }
-                },
-
-                sortBy(field) {
-                    // Tri simple
-                    this.filteredProducts.sort((a, b) => {
-                        if (a[field] < b[field]) return -1;
-                        if (a[field] > b[field]) return 1;
-                        return 0;
-                    });
-                    this.updatePagination();
-                },
-
-                toggleAll(checked) {
-                    if (checked) {
-                        this.selectedProducts = this.paginatedProducts.map(p => p.id);
-                    } else {
-                        this.selectedProducts = [];
-                    }
-                },
-
-                editProduct(product) {
-                    console.log('Modifier produit:', product);
-                    // Implémenter la modification
-                },
-
-                deleteProduct(id) {
-                    if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
-                        console.log('Supprimer produit:', id);
-                        // Implémenter la suppression
-                    }
-                },
-
-                bulkAction(action) {
-                    console.log('Action en bulk:', action, this.selectedProducts);
-                    // Implémenter les actions en bulk
-                }
-            }));
-
             Alpine.data('productForm', () => ({
                 form: {
                     name: '',
@@ -936,6 +695,26 @@
             }));
         });
     </script>
+       <script>
+    const email = localStorage.getItem('userEmail');
+
+    if (email) {
+        fetch(`/api/me?email=${encodeURIComponent(email)}`)
+            .then(r => r.json())
+            .then(user => {
+                if (user.name) {
+                    document.getElementById('userName').textContent = user.name;
+                } else {
+                    document.getElementById('userName').textContent = 'Utilisateur inconnu';
+                }
+            })
+            .catch(() => {
+                document.getElementById('userName').textContent = 'Erreur';
+            });
+    } else {
+        document.getElementById('userName').textContent = 'Non connecté';
+    }
+</script>
 
     <!-- Main App Script -->
 </body>

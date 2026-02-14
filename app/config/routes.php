@@ -31,8 +31,59 @@ Flight::route('GET /dashboard', function () {
     }
 });
 
+// Route pour servir les assets de views/assets/
+Flight::route('GET /views/assets/images/@filename', function($filename) {
+    $path = __DIR__ . '/../views/assets/images/' . $filename;
+    if (file_exists($path)) {
+        $mime = mime_content_type($path);
+        header('Content-Type: ' . $mime);
+        readfile($path);
+        return;
+    }
+    Flight::notFound();
+});
+
+Flight::route('GET /views/assets/inc/*', function() {
+    $uri = Flight::request()->url;
+    $file = basename($uri);
+    $path = __DIR__ . '/../views/assets/inc/' . $file;
+    if (file_exists($path)) {
+        $mime = mime_content_type($path);
+        header('Content-Type: ' . $mime);
+        readfile($path);
+        return;
+    }
+    Flight::notFound();
+});
+
 // ================================================
-// 3. Route dynamique pour les autres pages
+// 3. Routes spécifiques (avant la route dynamique)
+// ================================================
+
+// Route pour /products qui sert products.php
+Flight::route('GET /products', function () {
+    $path = __DIR__ . '/../views/products.php';
+    if (file_exists($path)) {
+        header('Content-Type: text/html; charset=utf-8');
+        include $path;
+        return;
+    }
+    Flight::notFound('<h1>Page products.php non trouvée</h1>');
+});
+
+// Route spécifique pour product.php qui sert products.php
+Flight::route('GET /product.php', function () {
+    $path = __DIR__ . '/../views/products.php';
+    if (file_exists($path)) {
+        header('Content-Type: text/html; charset=utf-8');
+        include $path;
+        return;
+    }
+    Flight::notFound('<h1>Page products.php non trouvée</h1>');
+});
+
+// ================================================
+// 4. Route dynamique pour les autres pages
 // ================================================
 Flight::route('GET /@page', function ($page) {
     $extensions = ['.html', '.php'];
@@ -54,7 +105,7 @@ Flight::route('POST /api/login', [$controller, 'login']);
 Flight::route('GET /api/users', [$controller, 'getUsers']);
 Flight::route('GET /api/users/@id', [$controller, 'getUser']);
 Flight::route('POST /api/users/@id', [$controller, 'updateUser']);
-
+Flight::route('GET /api/objets-par-utilisateur', [$controller, 'getObjetsByUser']);
 // Route pour récupérer l'utilisateur connecté
 Flight::route('GET /api/me', function() use ($app) {
     $email = $app->request()->query['email'] ?? '';
