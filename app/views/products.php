@@ -359,41 +359,35 @@
                                                 <input type="search" 
                                                        class="form-control form-control-sm" 
                                                        placeholder="Search products..."
-                                                       x-model="searchQuery"
-                                                       @input="filterProducts()"
+                                                       id="searchInput"
                                                        style="width: 200px;">
                                                 <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-2 text-muted"></i>
                                             </div>
                                             
                                             <!-- Category Filter -->
                                             <select class="form-select form-select-sm" 
-                                                    x-model="categoryFilter" 
-                                                    @change="filterProducts()"
+                                                    id="categoryFilter"
                                                     style="width: 150px;">
-                                                <option value="">All Categories</option>
-                                                <option value="electronics">Electronics</option>
-                                                <option value="clothing">Clothing</option>
-                                                <option value="books">Books</option>
-                                                <option value="home">Home & Garden</option>
+                                                <option value="">Toutes les catégories</option>
                                             </select>
                                             
-                                            <!-- Stock Filter -->                                         
+                                            <!-- User Filter -->                                         
                                             <select class="form-select form-select-sm" 
-                                                    x-model="stockFilter" 
-                                                    @change="filterProducts()"
+                                                    id="userFilter"
                                                     style="width: 150px;">
-                                                <option value="">All Stock</option>
-                                                <option value="in-stock">In Stock</option>
-                                                <option value="low-stock">Low Stock</option>
-                                                <option value="out-of-stock">Out of Stock</option>
+                                                <option value="">Tous les utilisateurs</option>
                                             </select>
+
+                                            <button type="button" class="btn btn-sm btn-primary" id="searchBtn">
+                                                Rechercher
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body p-3">
                         <!-- Simple display of objects by user -->
-                        <div class="container-fluid">
+                        <div class="container-fluid" id="objectsByUser">
                             <h4 class="mb-4">Objets par Utilisateur</h4>
 
                             <?php
@@ -660,6 +654,170 @@
                 mainImage.src = newSrc;
             }
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const userFilter = document.getElementById('userFilter');
+            const searchBtn = document.getElementById('searchBtn');
+            const objectsContainer = document.getElementById('objectsByUser');
+
+            if (!searchInput || !categoryFilter || !userFilter || !searchBtn || !objectsContainer) {
+                return;
+            }
+
+            const escapeHtml = (str) => {
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            };
+
+            const renderObjects = (data) => {
+                let html = '<h4 class="mb-4">Objets par Utilisateur</h4>';
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    html += '<div class="alert alert-info">Aucun objet trouvé.</div>';
+                    objectsContainer.innerHTML = html;
+                    return;
+                }
+
+                data.forEach((userData) => {
+                    const userName = escapeHtml(userData.user?.name ?? '');
+                    const userEmail = escapeHtml(userData.user?.email ?? '');
+
+                    html += '<div class="mb-5">';
+                    html += '<h5 class="text-primary mb-3">';
+                    html += '<i class="bi bi-person-circle me-2"></i>';
+                    html += userName;
+                    html += '<small class="text-muted ms-2">' + userEmail + '</small>';
+                    html += '</h5>';
+
+                    html += '<div class="row g-3">';
+
+                    (userData.objets || []).forEach((objet) => {
+                        const id = escapeHtml(objet.id ?? '');
+                        const image = escapeHtml(objet.image ?? '');
+                        const category = escapeHtml(objet.category ?? '');
+                        const price = Number(objet.price ?? 0).toFixed(2);
+
+                        html += '<div class="col-md-4 col-lg-3 mb-4">';
+                        html += '<div class="card" style="width: 18rem;">';
+                        html += '<div class="card-body">';
+
+                        html += '<img id="mainImage-' + id + '" src="' + image + '" class="img-fluid mb-3 rounded" alt="Objet ' + id + '" style="width: 100%; height: 200px; object-fit: cover;">';
+
+                        html += '<div class="d-flex justify-content-between mb-3">';
+                        html += '<img src="' + image + '" class="img-thumbnail thumb" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="changeImage(' + id + ', this.src)">';
+                        html += '<img src="' + image + '" class="img-thumbnail thumb" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="changeImage(' + id + ', this.src)">';
+                        html += '<img src="' + image + '" class="img-thumbnail thumb" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="changeImage(' + id + ', this.src)">';
+                        html += '</div>';
+
+                        html += '<h6 class="card-title">Objet ' + id + '</h6>';
+                        html += '<p class="card-text">';
+                        html += '<strong>Utilisateur:</strong> ' + userName + '<br>';
+                        html += '<strong>Catégorie:</strong> ' + category + '<br>';
+                        html += '<strong>Prix:</strong> <span class="text-success fw-bold">$ ' + price + '</span>';
+                        html += '</p>';
+
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                    });
+
+                    html += '</div>';
+                    html += '</div>';
+                });
+
+                objectsContainer.innerHTML = html;
+            };
+
+            const fetchOptions = async () => {
+                const currentCategory = categoryFilter.value;
+                const currentUser = userFilter.value;
+
+                const [categoriesRes, usersRes] = await Promise.all([
+                    fetch('/api/categories'),
+                    fetch('/api/users')
+                ]);
+
+                const categories = await categoriesRes.json();
+                const users = await usersRes.json();
+
+                categoryFilter.innerHTML = '<option value="">Toutes les catégories</option>';
+                (categories || []).forEach((category) => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.textContent = category.nom;
+                    categoryFilter.appendChild(option);
+                });
+
+                userFilter.innerHTML = '<option value="">Tous les utilisateurs</option>';
+                (users || []).forEach((user) => {
+                    const option = document.createElement('option');
+                    option.value = user.id;
+                    option.textContent = `${user.name} (${user.email})`;
+                    userFilter.appendChild(option);
+                });
+
+                if (currentCategory) {
+                    categoryFilter.value = currentCategory;
+                }
+                if (currentUser) {
+                    userFilter.value = currentUser;
+                }
+            };
+
+            const fetchObjects = async () => {
+                const params = new URLSearchParams();
+                if (searchInput.value.trim() !== '') {
+                    params.set('q', searchInput.value.trim());
+                }
+                if (categoryFilter.value !== '') {
+                    params.set('category', categoryFilter.value);
+                }
+                if (userFilter.value !== '') {
+                    params.set('user', userFilter.value);
+                }
+
+                const res = await fetch('/api/objets?' + params.toString());
+                const payload = await res.json();
+
+                if (payload && payload.success) {
+                    renderObjects(payload.data);
+                } else {
+                    renderObjects([]);
+                }
+            };
+
+            const runSearch = async () => {
+                searchBtn.disabled = true;
+                try {
+                    await fetchOptions();
+                    await fetchObjects();
+                } catch (err) {
+                    objectsContainer.innerHTML = '<h4 class="mb-4">Objets par Utilisateur</h4><div class="alert alert-danger">Erreur lors du chargement.</div>';
+                } finally {
+                    searchBtn.disabled = false;
+                }
+            };
+
+            searchBtn.addEventListener('click', runSearch);
+            searchInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    runSearch();
+                }
+            });
+            categoryFilter.addEventListener('change', runSearch);
+            userFilter.addEventListener('change', runSearch);
+
+            runSearch();
+        });
     </script>
 
     <!-- Script pour les autres fonctionnalités (sans appel API pour les objets) -->

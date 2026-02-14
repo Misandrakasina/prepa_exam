@@ -106,6 +106,8 @@ Flight::route('GET /api/users', [$controller, 'getUsers']);
 Flight::route('GET /api/users/@id', [$controller, 'getUser']);
 Flight::route('POST /api/users/@id', [$controller, 'updateUser']);
 Flight::route('GET /api/objets-par-utilisateur', [$controller, 'getObjetsByUser']);
+Flight::route('GET /api/categories', [$controller, 'getCategories']);
+Flight::route('GET /api/objets', [$controller, 'getObjetsFiltered']);
 // Route pour récupérer l'utilisateur connecté
 Flight::route('GET /api/me', function() use ($app) {
     $email = $app->request()->query['email'] ?? '';

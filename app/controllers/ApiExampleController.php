@@ -55,6 +55,12 @@ class ApiExampleController
         $this->app->json($users);
     }
 
+    public function getCategories()
+    {
+        $categories = $this->db()->fetchAll("SELECT id, nom FROM categories ORDER BY nom");
+        $this->app->json($categories);
+    }
+
     public function getUser($id)
     {
         $user = $this->db()->fetchRow(
@@ -142,6 +148,91 @@ class ApiExampleController
                     'price'    => (float) $objet['price'],
                     'image'    => $objet['image'],
                     'category' => $objet['category'],
+                ];
+            }
+
+            $this->app->json([
+                'success' => true,
+                'data'    => array_values($result),
+            ]);
+        } catch (\Exception $e) {
+            $this->app->json([
+                'success' => false,
+                'message' => 'Erreur lors de la récupération des objets : ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Recherche/filtre des objets
+     * GET /api/objets?q=&category=&user=
+     */
+    public function getObjetsFiltered()
+    {
+        try {
+            $query = trim($this->app->request()->query['q'] ?? '');
+            $category = trim($this->app->request()->query['category'] ?? '');
+            $user = trim($this->app->request()->query['user'] ?? '');
+
+            $sql = "
+                SELECT o.id_objet AS id,
+                       o.prix_estime AS price,
+                       o.image_path AS image,
+                       o.id_user,
+                       u.name AS userName,
+                       u.email AS userEmail,
+                       c.id AS categoryId,
+                       c.nom AS category
+                FROM objets o
+                JOIN users u ON o.id_user = u.id
+                JOIN categories c ON o.id_categorie = c.id
+                WHERE 1=1
+            ";
+
+            $params = [];
+
+            if ($query !== '') {
+                $sql .= " AND (CAST(o.id_objet AS CHAR) LIKE ? OR u.name LIKE ? OR u.email LIKE ? OR c.nom LIKE ?)";
+                $like = '%' . $query . '%';
+                $params[] = $like;
+                $params[] = $like;
+                $params[] = $like;
+                $params[] = $like;
+            }
+
+            if ($category !== '' && ctype_digit($category)) {
+                $sql .= " AND c.id = ?";
+                $params[] = (int) $category;
+            }
+
+            if ($user !== '' && ctype_digit($user)) {
+                $sql .= " AND u.id = ?";
+                $params[] = (int) $user;
+            }
+
+            $sql .= " ORDER BY u.name, o.id_objet";
+
+            $objets = $this->db()->fetchAll($sql, $params);
+
+            $result = [];
+            foreach ($objets as $objet) {
+                $userId = $objet['id_user'];
+                if (!isset($result[$userId])) {
+                    $result[$userId] = [
+                        'user' => [
+                            'id'    => (int) $userId,
+                            'name'  => $objet['userName'],
+                            'email' => $objet['userEmail'],
+                        ],
+                        'objets' => [],
+                    ];
+                }
+                $result[$userId]['objets'][] = [
+                    'id'         => (int) $objet['id'],
+                    'price'      => (float) $objet['price'],
+                    'image'      => $objet['image'],
+                    'categoryId' => (int) $objet['categoryId'],
+                    'category'   => $objet['category'],
                 ];
             }
 
